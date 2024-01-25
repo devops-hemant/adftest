@@ -25,11 +25,12 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo "${{vars.PARAM}}" > param.txt
+          sed ':a;N;$!ba;s/\n//g' param.txt > param2.txt
           while IFS=',' read -r a b; do
             set -x
-            find . -type f -exec sed -i -e "s/${a}/${b}/g" {} +
+            find . -type f -exec sed -i -e "s/${a}/${b}/g" {} \;
             set +x
             echo "$a to $b"
-          done <<< $(cat param.txt)
+          done <<< $(cat param2.txt)
 
           cat adf/dataset/Excel1.json
