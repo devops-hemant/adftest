@@ -27,7 +27,7 @@ jobs:
           echo "${{vars.PARAM}}" > param.txt
           while IFS=',' read -r a b; do
             set -x
-            find . -type f -exec sed -i -e "s/${a}/${b}/g" {} \;
+            find . -type f -exec sed -i -e "s/${a}/${b}/g" {} +
             set +x
             echo "$a to $b"
           done <<< $(cat param.txt)
