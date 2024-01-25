@@ -25,7 +25,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo "${{vars.PARAM}}" > param.txt
-          sed ':a;N;$!ba;s/\n//g' param.txt > param2.txt
+          sed 's/\r$//' param.txt > param2.txt
           while IFS=',' read -r a b; do
             set -x
             find . -type f -exec sed -i -e "s/${a}/${b}/g" {} \;
