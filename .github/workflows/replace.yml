@@ -24,8 +24,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo "${{vars.PARAM}}" > param.txt
-          sed 's/\r$//' param.txt > param2.txt
+          echo "${{vars.PARAM}}" | sed 's/\r$//' > param2.txt
           while IFS=',' read -r a b; do
             set -x
             find . -type f -exec sed -i -e "s/${a}/${b}/g" {} \;
